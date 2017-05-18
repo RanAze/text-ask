@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社——http://www.zhinengshe.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <style>
+        #box{
+            width:300px;
+            height:300px;
+            border: 1px dashed #000;
+            position: absolute;
+            left:0;
+            top:0;
+            right:0;
+            bottom:0;
+            margin: auto;
+            text-align: center;
+            line-height: 300px;
+            display: none;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var oBox=document.querySelector('#box');
+
+            var timer=null;
+            document.ondragover=function(){
+                clearTimeout(timer);
+                oBox.style.display='block';
+
+                timer=setTimeout(function(){
+                    oBox.style.display='none';
+                },200);
+            };
+
+            oBox.ondragenter=function(){
+                oBox.innerHTML='释放鼠标!';
+            };
+            oBox.ondragleave=function(){
+                oBox.innerHTML='请将文件拖到此区域!';
+            };
+
+            oBox.ondragover=function(){
+                return false;
+            };
+
+            oBox.ondrop=function(ev){
+                //alert(ev.dataTransfer.files.length);
+                var oFile=ev.dataTransfer.files[0];
+                //alert(oFile.name);
+                //alert(oFile.size);
+                //alert(oFile.type);
+                var oDate=oFile.lastModifiedDate;
+                var y=oDate.getFullYear();
+                var m=oDate.getMonth()+1;
+                var d=oDate.getDate();
+                alert(m+'/'+d+'/'+y);
+                return false;
+            };
+        };
+    </script>
+</head>
+<body>
+    <div id="box">
+        请将文件拖到此区域!
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
